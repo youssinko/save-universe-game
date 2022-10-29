@@ -1,0 +1,8 @@
+*{
+    display: flexbox;
+    justify-content: center;
+    text-align: center;
+}
+.hide{
+    display: none;
+}
