@@ -10,6 +10,7 @@
 
 </head>
 <body>
+    
  <div id="start-btn">
     
     <h1>We are being attacked by Aliens</h1>
@@ -20,14 +21,50 @@
     <h2>Please Enter Your Nickname</h2>
 
     <form>
+
         <div>
             <label for="nickName">Nickname:</label>
             <input type="text" id="nickName">
         </div>
-            <button id="submit-btn" onclick="submit()">Submit</button>
-            <p id="welcome"></p>
+
     </form>
+
+            <div>
+            <button id="submit-btn" onclick="submit()">PLAY</button>
+            </div>
+            
+     </div>
+    
+     
+     
+
+
+<div id="alienship">
+    <p class="hide" id="welcome"></p>
+    <div>
+    <img class="ships" src="./images/spaceship.png" alt="alien">
+    <img class="ships" src="./images/spaceship.png" alt="alien">
+    <img class="ships" src="./images/spaceship.png" alt="alien">
+    <img class="ships" src="./images/spaceship.png" alt="alien">
+    <img class="ships" src="./images/spaceship.png" alt="alien">
+    <img class="ships" src="./images/spaceship.png" alt="alien">
+    </div>
+    <div>
+        <img id="usShip"src="./images/userspaceshipone.png" alt="USS ship">
+        
+    </div>
+    
+    <button class="attack hide" onclick="playgame()">ATTACK</button>
+    <p id="prompt1"></p>
+    <p id="prompt2"></p>
+    <p id="prompt3"></p>
+    
+    
+    
+    
 </div>
+<button class="heal hide">HEAL</button>
+
     
 </body>
 </html>

@@ -6,3 +6,17 @@
 .hide{
     display: none;
 }
+img{
+    width: 100vw;
+    height: 100vh;
+
+}
+.ships{
+    width: 10%;
+    height: 10%;
+}
+#usShip{
+    width:30%;
+    height: 30%;
+    
+}
