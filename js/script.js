@@ -19,6 +19,8 @@ const healBtn = document.querySelector(".heal")
 const promptEl = document.querySelector("#prompt1")
 const promptEl2 = document.querySelector("#prompt2")
 const promptEl3 = document.querySelector("#prompt3")
+const promptEl4 = document.querySelector("#prompt4")
+const hastyBtn = document.querySelector(".retreat")
 
 function submit(){
     welcomeEl.classList.toggle("hide")
@@ -99,53 +101,14 @@ function submit(){
 // }
 // healBtn.addEventListener('click',healBtn)
 //=========================
-// class USS_Earth{
-//     hull=20;
-//     firepower = 5;
-//     accuracy = 0.7;
-//     attack(ship){
-//         let randomNum = math.random();
-//         if(randomNum.tofixed(2)< USS_Earth.accuracy){
-//             console.log(`Your hit chance: ${randomNum.tofixed(2)}is under you accuracy!`)
-//             console.log(`It's a hit!`)
-//             console.log(`${ship.shipName} HP:${ship.hull}`)
-//             ship.hull -= USS_Earth.firepower
-//             console.log(`${ship.shipName} HP:${ship.hull.tofixed(2)}`)
-//             return ship.hull
-
-//         }else {
-//             console.log(`you missed the alien ship ${ship.shipName}`)
-//             console.log(`your hit chance : ${randomNum.tofixed(2)} didn't fall under your accuracy of 0.7`)
-//         }
-//     }
-// }
-// class AlienShip{
-//     randomHull = Math.random()* (6 - 3)+3;
-//     randomFirePower = Math.random()* (4 - 2)+2
-//     randomAccuracy = Math.random() * (.8 - .6) +.6
-// constructor(name){
-//     this.shipName = name;
-//     this.hull = this.randomHull.tofixed(2)
-//     this.firepower = this.randomFirePower.toFixed(2)
-//     this.accuracy = this.randomAccuracy.tofixed(2)
-// }
-
-// attack(){
-//     let randomNum = Math.random()
-//     if(randomNum <this.accuracy){
-//         console.log(`the hit chance ${randomNum.tofixed(2)} is under its accuracy of ${this.accuracy}`)
-//     }
-// }
-// }
-///==============
 
 
-///////////final
+/////////// ===================== final ======================
 let USS_Earth = {
     hull: 20,
     firepower: 5,
     accuracy: 0.7,
-    attack:(Math.random()*(1 - 0 )+ 0).toFixed(1)
+    attack:(Math.random()*(1 - 0 )+ 0).toFixed(1),
 
     }
    
@@ -156,42 +119,46 @@ let alien = {
     accuracy: (Math.random()*(0.6 - 0.8 )+ 0.8).toFixed(1),
     aliens:['alien1','alien2','alien3','alien4','alien5','alien6']
     
-}
+} 
 
-alien.aliens[0].src = `images/spaceship.png`
+//alien.aliens[0].src = `images/spaceship.png`
 
 
 console.log(alien.accuracy)
 console.log(USS_Earth.attack)
-let attackFirst = true
-const playgame = function(){
-    
-    if (attackFirst === true){
+let attackFirst = false
+const attack = function(){
+    while(USS_Earth.hull > 0){
+    if (attackFirst === false){
         console.log(`You are attacking the alien`)
     
-       
+        
         if(USS_Earth.attack == alien.accuracy)
         { 
             console.log(`You HIT the alien` )
             console.log(`You have done ${alien.firepower + 1} damages`)
             console.log(`Alien had ${alien.hull} hulls, now Alien has ${alien.hull -1 } remaining hull`)
             alien.aliens.shift()
-           
+           console.log(alien.aliens)
            promptEl.innerHTML =`You HIT the alien`
            promptEl2.innerHTML =`You have done ${alien.firepower + 1} damages`
            promptEl3.innerHTML =`Alien had ${alien.hull} hulls, now Alien has ${alien.hull -1 } remaining hull`
            console.log(alien.aliens)
-        
+           hastyBtn.classList.toggle('hide')
+           continue
+           
         }  
         else 
         {
                console.log(`You have missed, Now it's Aliens Turn`)
               promptEl2.innerHTML = `You have missed, Now it's Aliens Turn`
               attackBack()
+              
         }
         
     }
                function attackBack(){
+                
                 if(USS_Earth.attack == USS_Earth.accuracy){
                     console.log(`You have been HIT and You have ${USS_Earth.hull - 1} remaining Hull`)
                    promptEl3.innerHTML = `You have been HIT and You have ${USS_Earth.hull - 1} remaining Hull`
@@ -200,19 +167,110 @@ const playgame = function(){
             
                 else if(USS_Earth.attack !== USS_Earth.accuracy) {
                     console.log(`You've survived, now it's Your turn`)
-                   promptEl3.innerHTML =`You've survived, now it's Your turn`
-                    
+                   promptEl3.innerHTML =`You've survived, now it's Your turn`;
+                   
+                  // attackFirst= false
                 }
+                
             }
+            break
             }
             
-        
+        }
     
     
         
 
-attackBtn.addEventListener('click',playgame)
+attackBtn.addEventListener('click',attack)
 function heal(){
     alienShipEl.classList.toggle('hide')
+   promptEl4.innerHTML=`You are Healing.... click "Heal" button again if you are ready to go back and fight `
+    
+}
+function retreat(){
+    alienShipEl.classList.toggle('hide')
+    promptEl4.innerHTML=`You have chosen to make a hasty retreat `
 }
 healBtn.addEventListener('click',heal)
+hastyBtn.addEventListener('click',retreat)
+/////============ encapsulation =============
+
+// let hull = 20
+// let firepower = 5
+// let accuracy = 0.7
+// let alienAccuracy = (Math.random()*(0.6 - 0.8 )+ 0.8).toFixed(1)
+// let alienHull = Math.floor(Math.random()*(6 - 3)+ 3)
+// let alienFirepower =Math.floor(Math.random()*(4 - 2 )+ 2)
+// let generalAccuracy = (Math.random()*(1 - 0 )+ 0).toFixed(1)
+// class OurShip {
+//    constructor(){
+//        this.hull = hull,
+//        this.firepower = firepower,
+//        this.accuracy = accuracy
+//    }
+// }
+// class Alien{
+//     constructor(){
+//        this.alienAccuracy = alienAccuracy,
+//        this.alienHull = alienHull,
+//        this.alienFirepower = alienFirepower,
+//        this.generalAccuracy = generalAccuracy
+
+//     }
+// }
+// console.log(this.accuracy)
+// let attackFirst = false
+// function battle(){
+//     while(this.hull > 0){
+       
+   
+//     if (attackFirst === false){
+//         console.log(`You are attacking the alien`)
+    
+        
+//         if(this.generalAccuracy == this.alienAccuracy)
+//         { 
+//             console.log(`You HIT the alien` )
+//             console.log(`You have done ${this.alienFirepower + 1} damages`)
+//             console.log(`Alien had ${this.alienHull} hulls, now Alien has ${this.alienHull -1 } remaining hull`)
+//             alien.aliens.shift()
+           
+//            promptEl.innerHTML =`You HIT the alien`
+//            promptEl2.innerHTML =`You have done ${this.alienFirepower + 1} damages`
+//            promptEl3.innerHTML =`Alien had ${this.alienHull} hulls, now Alien has ${this.alienHull -1 } remaining hull`
+           
+//            hastyBtn.classList.toggle('hide')
+           
+           
+//         }  
+//         else 
+//         {
+//                console.log(`You have missed, Now it's Aliens Turn`)
+//               promptEl2.innerHTML = `You have missed, Now it's Aliens Turn`
+//               attackBack()
+              
+//         }
+        
+//     }
+//                function attackBack(){
+//                 if(this.generalAccuracy == this.accuracy){
+//                     console.log(`You have been HIT and You have ${this.hull - 1} remaining Hull`)
+//                    promptEl3.innerHTML = `You have been HIT and You have ${this.hull - 1} remaining Hull`
+                  
+//                 } 
+            
+//                 else if(this.generalAccuracy !== this.accuracy) {
+//                     console.log(`You've survived, now it's Your turn`)
+//                    promptEl3.innerHTML =`You've survived, now it's Your turn`;
+                   
+//                 }
+                
+//             }
+//             break
+//             }
+            
+//         }
+    
+
+
+// attackBtn.addEventListener('click',battle)
